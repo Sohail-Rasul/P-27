@@ -3,11 +3,10 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
-const Constraint= Matter.Constraint;
-
-var bob1,bob2,bob3,bob4,bob5;
-var base;
-var rope1,rope2,rope3,rope4,rope5;
+const Constraint = Matter.Constraint ; 
+var bobObject1,bobObject2,bobObject3 ,bobObject4,bobObject5;
+var ground;
+var roofObject ; 
 
 function preload()
 {
@@ -15,42 +14,57 @@ function preload()
 }
 
 function setup() {
-	createCanvas(800, 700);
-
-
 	engine = Engine.create();
 	world = engine.world;
+	createCanvas(1300, 700);
 
-	//Create the Bodies Here.
-	bob1=new Bob(400,350,20);
-	bob2=new Bob(420,350,20);
-	bob3=new Bob(440,350,20);
-	bob4=new Bob(380,350,20);
-	bob5=new Bob(360,350,20);
-	base=new Base(400,150,250,40);
-	rope1=new Rope(bob1,{x:450,y:150});
-	rope2=new Rope(bob2,{x:450,y:150});
-	rope3=new Rope(bob3,{x:500,y:150});
-	rope4=new Rope(bob4,{x:550,y:150});
-	rope5=new Rope(bob5,{x:600,y:150});
+bobObject1=new Bob(300,350,50);
+bobObject2=new Bob(350,350,50);
+bobObject3=new Bob(400,350,50);
+bobObject4=new Bob(450,350,50);
+bobObject5=new Bob(500,350,50);
+ground = new Roof(400,200,300,20);
+sling1= new Rope(bobObject1.body,ground.body,-50*2,0);
+sling2= new Rope(bobObject2.body,ground.body,-25*2,0);
+sling3= new Rope(bobObject3.body,ground.body,-0*2,0);
+sling4= new Rope(bobObject4.body,ground.body,25*2,0);
+sling5= new Rope(bobObject5.body,ground.body,50*2,0);
 	
+
+
+
+	
+
+
 	Engine.run(engine);
+  
 }
 
 
 function draw() {
   rectMode(CENTER);
-  background(0);
+  background(230);
   
-//   drawSprites();
- bob1.display();
- bob2.display();
- bob3.display();
- bob4.display();
- bob5.display();
- base.display();
- rope1.display();
+  drawSprites();
+
+	bobObject1.display();
+	bobObject2.display();
+	bobObject3.display();
+	bobObject4.display();
+	bobObject5.display();
+	ground.display();
+	sling1.display();
+  sling2.display();
+  sling3.display();
+  sling4.display();
+  sling5.display();
+	
+
 }
 
+function keyPressed() { 
+	if (keyCode === UP_ARROW) 
+	{ Matter.Body.applyForce(bobObject1.body,bobObject1.body.position,{x:-100,y:-100}); } 
+} 
 
 
